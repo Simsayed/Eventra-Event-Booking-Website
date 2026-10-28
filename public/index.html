@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventra | NMAMIT event and venue booking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="/">Eventra</a>
+  <div id="who" hidden><span id="uname"></span><button id="logout" class="ghost">Log out</button></div>
+</header>
+
+<main>
+  <section id="auth" class="auth">
+    <div class="pitch">
+      <h1>One calendar for every hall, lab and lawn on campus.</h1>
+      <p>See what is booked, pick a free slot, and reserve it. Sign in with your @nmamit.in or @nitte.edu.in email.</p>
+    </div>
+    <div class="panel">
+      <div class="tabs">
+        <button data-tab="loginF" class="on">Log in</button>
+        <button data-tab="registerF">Register</button>
+      </div>
+      <form id="loginF">
+        <label>College email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+        <button class="primary">Log in</button>
+      </form>
+      <form id="registerF" hidden>
+        <label>Full name<input name="name" required autocomplete="name"></label>
+        <label>College email<input type="email" name="email" required placeholder="name@nmamit.in"></label>
+        <label>Password (8+ characters)<input type="password" name="password" minlength="8" required autocomplete="new-password"></label>
+        <button class="primary">Send verification code</button>
+      </form>
+      <form id="verifyF" hidden>
+        <p class="muted">We sent a 6-digit code to <b id="vmail"></b>.</p>
+        <label>Verification code<input name="code" inputmode="numeric" maxlength="6" required></label>
+        <button class="primary">Verify and continue</button>
+      </form>
+      <p id="amsg" class="msg" role="alert"></p>
+    </div>
+  </section>
+
+  <section id="app" class="app" hidden>
+    <div class="calendar">
+      <div class="cal-head">
+        <button id="prev" class="ghost" aria-label="Previous month">&lsaquo;</button>
+        <h2 id="mlabel"></h2>
+        <button id="next" class="ghost" aria-label="Next month">&rsaquo;</button>
+        <select id="vfilter" aria-label="Filter by venue"></select>
+      </div>
+      <div id="grid" class="grid"></div>
+    </div>
+    <aside>
+      <div class="box">
+        <h3 id="dlabel"></h3>
+        <ul id="dlist" class="dlist"></ul>
+      </div>
+      <form id="bookF" class="box">
+        <h3>Book a slot</h3>
+        <label>Venue<select name="venue_id" id="bvenue" required></select></label>
+        <label>Event title<input name="title" maxlength="120" required></label>
+        <label>Date<input type="date" name="date" id="bdate" required></label>
+        <div class="row">
+          <label>Start<input type="time" name="start" required></label>
+          <label>End<input type="time" name="end" required></label>
+        </div>
+        <label>Details (optional)<textarea name="description" rows="2" maxlength="500"></textarea></label>
+        <button class="primary">Book this venue</button>
+        <p id="bmsg" class="msg" role="alert"></p>
+      </form>
+    </aside>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
